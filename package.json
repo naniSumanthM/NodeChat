@@ -1,0 +1,21 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "Node.JS chat app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "engines": {
+    "node": "8.9.4"
+  },
+  "keywords": [
+    "chat",
+    "app"
+  ],
+  "author": "sumanth maddirala",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
