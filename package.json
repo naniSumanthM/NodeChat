@@ -13,9 +13,10 @@
     "chat",
     "app"
   ],
-  "author": "sumanth maddirala",
+  "author": "Sumanth Maddirala",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "socket.io": "^2.1.1"
   }
 }
