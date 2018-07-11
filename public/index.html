@@ -7,8 +7,19 @@
 </head>
 
 <body>
-    <h1>Test</h1>
+    <h1>Node Chat</h1>
+
+    <ol id='messages'>
+
+    </ol>
+
+    <form id="message-form">
+        <input name='message' type='text' placeholder="Message" />
+        <button>Send</button>
+    </form>
+
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="/js/index.js"></script>
 </body>
 

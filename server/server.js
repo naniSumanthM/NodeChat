@@ -22,9 +22,10 @@ io.on('connection', (socket) => {
     //alert every other user of new user joining other than the new user
     socket.broadcast.emit('newMessage', generateMessage('Admin', "New user joined!"));
 
-    socket.on('createMessage', (message) => {
+    socket.on('createMessage', (message, callback) => {
         console.log('createMessage', message);
         io.emit('newMessage', generateMessage(message.from, message.text))
+        callback('from server')
     });
 
     socket.on('disconnect', () => {
