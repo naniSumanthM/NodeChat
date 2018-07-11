@@ -11,32 +11,32 @@ let io = socketIO(server)
 
 app.use(express.static(publicPath))
 
+
 io.on('connection', (socket) => {
     console.log('New client connected!');
 
-    //new Email emitted by the server
-    socket.emit('newEmail', {
-        from: "maddirsh@yahoo.com",
-        text: "Test from server",
-        createdAt: "today"
-    })
-
-    //Server listening to createEmail event triggered from the client
-    socket.on('createEmail', (newEmail) => {
-        console.log(newEmail);
-    })
-
-    //Server emitting the newMessage
+    //alerts all new clients of joining
     socket.emit('newMessage', {
-        from: "admin",
-        text: "Message from server admin",
-        createdAt: "Today"
-    })
+        from: 'Admin',
+        text: 'Welcome to the chat app',
+        createdAt: new Date().getTime()
+    });
 
-    //Server listening to createMessage event triggered from the client
+    //alert every other user of new user joining other than the new user
+    socket.broadcast.emit('newMessage', {
+        from: 'Admin',
+        text: 'New user joined',
+        createdAt: new Date().getTime()
+    });
+
     socket.on('createMessage', (message) => {
-        console.log(message);
-    })
+        console.log('createMessage', message);
+        io.emit('newMessage', {
+            from: message.from,
+            text: message.text,
+            createdAt: new Date().getTime()
+        });
+    });
 
     socket.on('disconnect', () => {
         console.log('Sever disconnected from the client!');
