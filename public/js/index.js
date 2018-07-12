@@ -11,16 +11,18 @@ socket.on('disconnect', function () {
 //client listening to the new message event from the server
 //client renders new message to window
 socket.on('newMessage', function (message) {
+    let formattedTime = moment(message.createdAt).format('h:mm:a')
     let li = jQuery('<li></li>');
-    li.text(`${message.from}: ${message.text}`)
+    li.text(`${message.from}: ${formattedTime}-->${message.text}`)
     jQuery('#messages').append(li)
 })
 
 //renders the current loaction with a link
 socket.on('newLocationMessage', function (message) {
+    let formattedTime = moment(message.createdAt).format('h:mm:a')
     let li = jQuery('<li></li>');
     let a = jQuery('<a target="_blank">Current Location</a>')
-    li.text(`${message.from}: `)
+    li.text(`${message.from}: ${formattedTime} `)
     a.attr('href', message.url)
     li.append(a)
     jQuery('#messages').append(li)
