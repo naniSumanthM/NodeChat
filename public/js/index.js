@@ -9,20 +9,14 @@ socket.on('disconnect', function () {
 })
 
 //client listening to the new message event from the server
+//client renders new message to window
 socket.on('newMessage', function (message) {
-    console.log("New Message: ", message);
     let li = jQuery('<li></li>');
     li.text(`${message.from}: ${message.text}`)
     jQuery('#messages').append(li)
 })
 
-socket.emit('createMessage', {
-    from: 'LABron',
-    text: 'King James'
-}, function (data) {
-    console.log('Got it', data);
-})
-
+//renders the current loaction with a link
 socket.on('newLocationMessage', function (message) {
     let li = jQuery('<li></li>');
     let a = jQuery('<a target="_blank">Current Location</a>')
@@ -32,6 +26,7 @@ socket.on('newLocationMessage', function (message) {
     jQuery('#messages').append(li)
 })
 
+//client creates new message
 jQuery('#message-form').on('submit', function (e) {
     e.preventDefault()
 
@@ -47,6 +42,7 @@ jQuery('#message-form').on('submit', function (e) {
 
 let locationBtn = jQuery('#send-location');
 
+//gets current client location and emits it to other clients
 locationBtn.on('click', function (e) {
     if (!navigator.geolocation) {
         return alert('Location Services Fialed')
