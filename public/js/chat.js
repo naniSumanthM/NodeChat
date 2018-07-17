@@ -32,6 +32,16 @@ socket.on('disconnect', function () {
     console.log('Client diconected from the server!');
 })
 
+socket.on('updateUserList', function (users) {
+    let ol = jQuery('<ol></ol>');
+
+    users.forEach(function (user) {
+        ol.append(jQuery('<li></li>').text(user));
+    });
+
+    jQuery('#users').html(ol);
+});
+
 //client listening to the new message event from the server
 //client renders new message to window
 socket.on('newMessage', function (message) {
@@ -69,7 +79,6 @@ jQuery('#message-form').on('submit', function (e) {
     let messageTextBox = jQuery('[name=message]')
 
     socket.emit('createMessage', {
-        from: "user",
         text: messageTextBox.val()
     }, function () {
         messageTextBox.val('')
