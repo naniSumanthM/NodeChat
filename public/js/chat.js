@@ -17,6 +17,15 @@ function scrollToBottom() {
 
 socket.on('connect', function () {
     console.log('Client connected to the server!');
+    let params = jQuery.deparam(window.location.search)
+    socket.emit('join', params, function (err) {
+        if (err) {
+            alert(err);
+            window.location.href = '/'
+        } else {
+            console.log('No Error');
+        }
+    })
 })
 
 socket.on('disconnect', function () {
