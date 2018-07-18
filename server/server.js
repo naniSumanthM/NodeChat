@@ -18,8 +18,8 @@ app.use(express.static(publicPath))
 
 io.on('connection', (socket) => {
 
+    //New user joins room
     socket.on('join', (params, callback) => {
-
         let room = params.room.toUpperCase()
 
         if (!isRealString(params.name) || !isRealString(room)) {
